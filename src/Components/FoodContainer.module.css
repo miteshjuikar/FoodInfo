@@ -1,0 +1,44 @@
+.imageSection{
+  height: 270px;
+  width: 200px;
+  background-color: rgb(205, 206, 207);
+  border-radius: 5px;
+}
+.imageSecSection{
+  margin: 5px;
+}
+.imgLabel{
+  img{
+    margin-top: 5px;
+    height: 190px;
+    width: 190px;
+  }
+  h1{
+    width: 200px;
+    font-size: 14px;
+    margin: 5px;
+  }
+}
+.para{
+  justify-content: space-between;
+  p{
+    display: table;
+    margin: 2px;
+    padding: 2px;
+    border: 1px solid black;
+  }
+
+  height: 23px;
+  display: flex;
+  font-size: 12px;
+}
+
+.foodContainer{
+  margin-top: 25px;
+  margin-left: 150px;
+  display: flex;
+  flex-wrap: wrap;
+  row-gap: 32px;
+  column-gap: 20px;
+   
+}

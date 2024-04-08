@@ -1,0 +1,54 @@
+.navbar1{
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    top: 4%;
+    bottom: 8%;
+    left: 3%;
+    width: 60px;
+    border-radius: 20px;
+    transition: all 0.2s linear;
+    box-shadow: 3px 3px rgba(0, 0, 0, 0.1);
+  
+    overflow: hidden;
+    background-color: rgb(205, 206, 207);
+  
+    ui{
+      list-style-type: none;
+    }
+    a{
+      position: relative;
+      display: table;
+      width: 200px;
+      margin-top: 10px;
+      padding: 10px;
+      font-size: 16px;
+      color: rgb(27, 31, 37);
+      
+    }
+  
+    .icon{
+      position: relative;
+      width: 40px;
+      height: 40px;
+
+      /* text-align: center; */
+    }
+  
+    .nav_item{
+      position: relative;
+      margin-left: 10px;
+      font-size: 18px;
+      
+    }
+  
+    .logout{
+      position: absolute;
+      bottom: 20px;
+    }
+  } 
+  
+  nav:hover{
+    width: 200px;
+  }
+  
