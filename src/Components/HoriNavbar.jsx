@@ -9,14 +9,19 @@ export default function HoriNavbar( { msg, setMsg, handleSearch,onSearch } ) {
     <>
     <div className={style.horiNav}>
         <h2>Recipes</h2>
-        <div>
-          <input 
-              className={style.searchText}
-              onChange={handleSearch}
-              placeholder='Search Here'
-              value={msg}
-          />
-          <IoSearch className={style.searchIcon} onClick={onSearch} />
+        <div className={style.horiButton}>
+          <Link to='/logIn'>
+            <button className={style.logIn}>Log In</button>
+          </Link>
+          <div>
+            <input 
+                className={style.searchText}
+                onChange={handleSearch}
+                placeholder='Search Here'
+                value={msg}
+                />
+            <IoSearch className={style.searchIcon} onClick={onSearch} />
+          </div>
         </div> 
     </div>
     </>

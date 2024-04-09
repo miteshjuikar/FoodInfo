@@ -1,0 +1,18 @@
+.advanceSearch{
+  margin-top: 2.5%;
+  margin-left: 10%;
+  height: 85vh;
+  width: 88vw;
+  border-radius: 10px;
+  background-color: rgb(216, 222, 222);
+}
+
+.textBox{
+    margin: 5px;
+    padding: 5px;
+    label{
+        position: relative;
+        left: -140px;
+    }
+} 
+

@@ -14,17 +14,19 @@ import RecipeDetails from './Components/RecipeDetails'
 import Home from './Home'
 import Layout from './Components/Layout';
 import FilteredList from './Components/FilteredList';
+import AdvanceSearch from './Components/AdvanceSearch';
+import LogIn from './Components/LogIn';
 
 
 const router = createBrowserRouter(createRoutesFromElements(
   <Route path="/" element={<Layout />} >
     <Route index element={<Home/>}/>
-    <Route path='/recipes' element={<Recipes />} />
-    <Route path='/recipes/:id' element={<RecipeDetails />} />
-    
-    <Route path='/searchAd' element={<h1>Advance Search</h1> } />
-    <Route path='/cart' element={<h1>Cart Page</h1>} />
-    <Route path='/about' element={<h1>About Us</h1>} />
+    <Route path='recipes' element={<Recipes />} />
+    <Route path='recipes/:id' element={<RecipeDetails />} />
+    <Route path='searchAd' element={<AdvanceSearch /> } />
+    <Route path='logIn' element={<LogIn /> } />
+    <Route path='cart' element={<h1>Cart Page</h1>} />
+    <Route path='about' element={<h1>About Us</h1>} />
   </Route>
 ))
 

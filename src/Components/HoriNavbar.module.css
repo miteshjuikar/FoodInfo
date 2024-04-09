@@ -10,6 +10,14 @@
         font-weight: 600;
     }
 }
+.logIn{
+    border-radius: 5px;
+    padding: 5px;
+}
+.horiButton{
+    display: flex;
+    gap: 10px;
+}
 .searchText{
     border-radius: 5px;
     padding: 5px;
