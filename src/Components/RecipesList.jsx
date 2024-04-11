@@ -1,18 +1,25 @@
 import React from 'react'
-import style from './FoodContainer.module.css'
-import { Link } from 'react-router-dom'
+import style from './RecipesList.module.css'
+import { useNavigate } from 'react-router-dom'
 
-export default function FoodContainer({foodCardData}) {
+export default function RecipesList({recipesListData}) {
+
+  const navigate = useNavigate();
+
+  function handleRecipeSerach(id) {
+    navigate(`/recipes/${id}`)
+  }
+
   return (
     <div className={style.foodContainer}>
       
-        {foodCardData.map((fooditem, i) => (
+        {recipesListData.map((fooditem, i) => (
             <div className={style.imageSection} key={i}>
             <div className={style.imageSecSection}>
-              <Link to={`/recipes/${fooditem.recipe.label}`} className={style.imgLabel}   >
+              <div className={style.imgLabel} onClick={()=> handleRecipeSerach(fooditem.recipe.label)}>
                 <img src={fooditem.recipe.image} alt="Food Image" />
                 <h1>{fooditem.recipe.label}</h1>
-              </Link>
+              </div>
               
               <div className={style.para}>
                 <p className={style.p1}>{Math.round(fooditem.recipe.calories)} CALORIES </p>

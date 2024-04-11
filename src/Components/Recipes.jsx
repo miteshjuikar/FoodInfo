@@ -1,5 +1,5 @@
 import React from 'react'
-import FoodContainer from './FoodContainer';
+import RecipesList from './RecipesList';
 import { RecipeData } from "../api";
 import HoriNavbar from './HoriNavbar';
 import { useState } from 'react';
@@ -12,6 +12,7 @@ export default function Recipes() {
     function handleSearch(e){
       setMsg(e.target.value);
     }
+
     function onSearch(){
       if(msg){
         setSearchFil(msg)
@@ -33,7 +34,7 @@ export default function Recipes() {
     <>
     <div className='recipesPage'>
       <HoriNavbar msg={msg} setMsg={setMsg} handleSearch={handleSearch} onSearch={onSearch} />
-      { data && <FoodContainer foodCardData={data} /> }
+      { data && <RecipesList recipesListData={data} /> }
     </div>
     </>
   )

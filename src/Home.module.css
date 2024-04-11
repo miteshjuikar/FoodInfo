@@ -1,0 +1,18 @@
+.homePage{
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+    background-image: url('./Images/img1.jpg');
+    background-size: cover;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .buttonStyle{
+    height: 50px;
+    width: 100px;
+  }

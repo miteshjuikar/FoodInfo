@@ -24,16 +24,27 @@ export default function AdvanceSearch() {
         }))
     }
 
+    function objectToUrlParams(obj) {
+        const params = [];
+        for (const key in obj) {
+            params.push(`${encodeURIComponent(key)}=${encodeURIComponent(obj[key])}`);
+        }
+        return params.join('&');
+    }
+    
     const handleReset = (e) => {
         setTextData({ diet:"", health:"", cuisineType:"", mealType:"", dishType:"" ,calories: "", time: "", glycemicIndex:"" })
     }
-    console.log(textData);
 
-    const handleAdvanceSubmit = () => {
-
+    const handleAdvanceSubmit = (e) => {
+        e.preventDefault()
+        let filteredObject = Object.fromEntries(Object.entries(textData).filter(([_, v]) => v != ""));
+        const myUrlData = objectToUrlParams(filteredObject);
+        console.log(myUrlData);
     }
+
   return (
-    <div className={style.advanceSearch}>
+    <form className={style.advanceSearch} onSubmit={handleAdvanceSubmit}>
 
         <div className="container text-center">
         <div className="row">
@@ -70,9 +81,9 @@ export default function AdvanceSearch() {
         </div>
         </div>
         <div className={style.advanceSearchButton} >
-            <input class={`btn btn-outline-secondary`} onClick={handleReset} type="Reset" value="Reset"></input>
-            <input class={`btn btn-primary`} onClick={handleAdvanceSubmit} type="submit" value="Submit"></input>
+            <input className={`btn btn-outline-secondary`} type="Reset" value="Reset"></input>
+            <input className={`btn btn-primary`} type="submit" value="Submit"></input>
         </div>
-    </div>
+    </form>
   )
 }

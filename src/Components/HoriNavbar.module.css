@@ -3,31 +3,23 @@
     margin-top: 20px;
     margin-left: 150px;
     justify-content: space-between;
-    height: auto;
     width: 80vw;
+    gap: 10px;
     h2{
         font-size: 24px;
         font-weight: 600;
     }
 }
-.logIn{
-    border-radius: 5px;
-    padding: 5px;
-}
 .horiButton{
     display: flex;
     gap: 10px;
 }
-.searchText{
-    border-radius: 5px;
-    padding: 5px;
-}
 .searchIcon{
-    font-size: 24px;
-    position: relative;
-    left: -30px;
-    top: -3px;
-   
-} 
+    font-size: 20px;
+}
+.serchName{
+    height: 40px;
+}
+
 
 

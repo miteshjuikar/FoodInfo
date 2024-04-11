@@ -1,11 +1,14 @@
 import React, { useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, Link } from 'react-router-dom'
 import { RecipeData } from "../api";
 import Container from './Container';
 
 export default function RecipeDetails() {
     const param = useParams();
     const [ arrData, setArrData ] = useState();
+
+
+
     function fetchRecipeData(id){
         React.useEffect(() => {
             async function resData(){
@@ -21,9 +24,12 @@ export default function RecipeDetails() {
         },[])
     }
     fetchRecipeData(param.id);
-    
+
   return (
     <>
+    <Link to='..' relative='path'>
+       <button>Back</button>
+    </Link>
       {arrData && <Container fooditem={arrData}/>}
     </>
   )

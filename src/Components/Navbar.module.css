@@ -15,8 +15,8 @@
     transition: all 0.2s linear;
 
       background-color: rgba(255, 255, 255, 0.2);
-      /* backdrop-filter: blur(2px) saturate(160%) contrast(45%) brightness(140%);
-      -webkit-backdrop-filter: blur(20px) saturate(160%) contrast(45%) brightness(140%); */
+      backdrop-filter: blur(2px) saturate(160%) contrast(45%) brightness(140%);
+  
     
     ul{
       list-style-type: none;
@@ -25,19 +25,23 @@
     a{
       position: relative;
       display: table;
-      width: 200px;
+      width: 210px;
       margin-top: 10px;
       padding: 10px;
       font-size: 16px;
-      color: rgb(27, 31, 37);
+      text-decoration: none;
+
+      color: inherit;
+      text-underline-offset: var(--offset, 0.2em);
+      text-decoration: underline 0.15em;
+      transition: --offset 400ms, text-decoration-color 400ms;
     }
   
     .icon{
       position: relative;
       width: 40px;
       height: 40px;
-
-      /* text-align: center; */
+      
     }
     .nav_item{
       position: relative;
@@ -53,19 +57,19 @@
   } 
   
   nav:hover{
-    width: 200px;
+    width: 210px;
     backdrop-filter: blur(20px) saturate(160%) contrast(45%) brightness(140%);
     -webkit-backdrop-filter: blur(20px) saturate(160%) contrast(45%) brightness(140%);
     
   }
-  @supports (-webkit-backdrop-filter: blur(30px) saturate(160%) contrast(45%) brightness(140%)) or
-  (backdrop-filter: blur(30px) saturate(160%) contrast(45%) brightness(140%)) {
-  .navbar-b.navbar-reduce {
-    transition: all 0.5s ease-in-out;
-    padding-top: 15px;
-    padding-bottom: 15px;
-    background-color: rgba(255, 255, 255, 0.2);
+  
+  a:hover,
+  a:focus {
+    background-color: rgb(245, 245, 248);
+    --offset: 0.4em;
+    text-decoration-color: orange;
   }
-}
+  
+
   
   
