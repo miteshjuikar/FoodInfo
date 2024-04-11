@@ -1,12 +1,18 @@
 import React from 'react'
 import style from './RecipesList.module.css'
 import { useNavigate } from 'react-router-dom'
+import Container from './Container';
 
 export default function RecipesList({recipesListData}) {
 
   const navigate = useNavigate();
 
-  function handleRecipeSerach(id) {
+
+  function handleRecipeSerach(id, i) {
+    // if(i>=0 && i<=20){
+    //   return(<Container fooditem={recipesListData[i]} />)
+    // }
+    
     navigate(`/recipes/${id}`)
   }
 
@@ -16,7 +22,7 @@ export default function RecipesList({recipesListData}) {
         {recipesListData.map((fooditem, i) => (
             <div className={style.imageSection} key={i}>
             <div className={style.imageSecSection}>
-              <div className={style.imgLabel} onClick={()=> handleRecipeSerach(fooditem.recipe.label)}>
+              <div className={style.imgLabel} onClick={()=> handleRecipeSerach(fooditem.recipe.label, i)}>
                 <img src={fooditem.recipe.image} alt="Food Image" />
                 <h1>{fooditem.recipe.label}</h1>
               </div>

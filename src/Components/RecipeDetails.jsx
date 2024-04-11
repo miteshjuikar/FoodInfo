@@ -7,8 +7,6 @@ export default function RecipeDetails() {
     const param = useParams();
     const [ arrData, setArrData ] = useState();
 
-
-
     function fetchRecipeData(id){
         React.useEffect(() => {
             async function resData(){

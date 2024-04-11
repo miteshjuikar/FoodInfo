@@ -1,34 +1,25 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import RecipesList from './RecipesList';
 import { RecipeData } from "../api";
-import HoriNavbar from './HoriNavbar';
 import { useState } from 'react';
+import { useLocation } from 'react-router-dom'
 import Spinner from './Spinner';
 
-export default function Recipes() { 
+export default function AdvanceSearchId() { 
     const [ data, setData ] = useState();
-    const [ searchFil, setSearchFil ] = useState("q=all");
+    const [ searchFil, setSearchFil ] = useState("all");
     const [ loading, setLoading ] = useState(false);
-    const [ msg, setMsg ] = useState();
+    const location = useLocation();
 
-    function handleSearch(e){
-      setMsg(e.target.value);
-    }
-
-    function onSearch(){
-      if(msg){
-        setSearchFil(msg)
-      }
-      else{
-        setSearchFil("q=all")
-      }
-    }
-
+    useEffect(() => {
+      setSearchFil(location.state)
+    },[location])
+    
     React.useEffect(() => {
         async function resData(){
           setLoading(false)
           const res = await RecipeData(searchFil);
-          setData(res.hits)
+          setData(res.hits);
           setLoading(true)
         }
         resData();
@@ -37,7 +28,10 @@ export default function Recipes() {
   return (
     <>
     <div className='recipesPage'>
-      <HoriNavbar msg={msg} setMsg={setMsg} handleSearch={handleSearch} onSearch={onSearch} />
+      {/* <HoriNavbar msg={msg} setMsg={setMsg} handleSearch={handleSearch} onSearch={onSearch} /> */}
+      <div className={`form-control`} >
+        <h4>Advance Search</h4>
+      </div>
       { !loading ? <Spinner /> : <RecipesList recipesListData={data} /> }  
     </div>
     </>

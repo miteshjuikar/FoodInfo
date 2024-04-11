@@ -1,11 +1,15 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import style from './SignUp.module.css'
-import { useState } from 'react'
 import {auth} from './firebase'
 import { createUserWithEmailAndPassword } from "firebase/auth";
+import Validation from './Validation'
 
 export default function SignUp() {
-  const [formData, setFormData] = useState({email:"", password:""});
+  const [formData, setFormData] = useState({email:"", password:"", confirmPassword: "", name: ""});
+  const [ error, setError ] = useState({email:"", password:"", confirmPassword: "", name: ""});
+  const [ signIn, setSignIn ] = useState(false);
+  const navigate = useNavigate();
 
   function handleChange(e){
     setFormData((pre) => ({
@@ -15,18 +19,44 @@ export default function SignUp() {
   }
   const email = formData.email;
   const password = formData.password;
-  console.log(auth, email, password);
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault()
-    const res = await createUserWithEmailAndPassword(auth, email, password)
-    const user = await res.user;
-    console.log(user)
+    setError(Validation(formData))
   }
+  useEffect(() => {
+    if(Object.keys(error).length === 0){
+      async function hitSign(){
+        createUserWithEmailAndPassword(auth, email, password)
+          .then((userCredential) => {
+          const user = userCredential.user;
+          setSignIn(true)
+          navigate("/logIn")
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          setSignIn(false)
+          alert(errorCode, errorMessage);
+        });
+      }
+      hitSign();
+    }
+  },[error])
 
   return (
     <div className={style.logInForm}>
     <form onSubmit={handleSubmit}>
+        <div className="mb-3">
+            <label htmlFor="name" className="form-label">Full Name</label>
+            <input type="text" 
+                    className="form-control" 
+                    id="name" 
+                    placeholder='Enter your full name'
+                    onChange={handleChange}
+            />
+            {error.name && <div className="form-text" style={{color: 'red'}}>{error.name}</div>}
+        </div>
         <div className="mb-3">
             <label htmlFor="exampleInputEmail1" className="form-label">Email address</label>
             <input type="email" 
@@ -34,18 +64,34 @@ export default function SignUp() {
                     id="email" 
                     aria-describedby="emailHelp"
                     value={formData.email} 
+                    placeholder='Enter your email Id'
                     onChange={handleChange}
             />
-            <div id="emailHelp" className="form-text">We'll never share your email with anyone else.</div>
+            {error.email ? <div className="form-text" style={{color: 'red'}}>{error.email}</div> : <div className="form-text">We'll never share your email with anyone else.</div>}
+            
         </div>
+        
         <div className="mb-3">
             <label htmlFor="exampleInputPassword1" className="form-label">Password</label>
             <input type="password" 
                     className="form-control" 
                     id="password" 
                     value={formData.password} 
+                    placeholder='Enter password'
                     onChange={handleChange}
-                    />
+            />
+            {error.password && <div className="form-text" style={{color: 'red'}}>{error.password}</div>}
+        </div>
+        <div className="mb-3">
+            <label htmlFor="verifyPassword1" className="form-label">Confirm Password</label>
+            <input type="password" 
+                    className="form-control" 
+                    id="confirmPassword" 
+                    placeholder='Confirm Password'
+                    value={formData.confirmPassword} 
+                    onChange={handleChange}
+            />
+            {error.confirmPassword && <div className="form-text" style={{color: 'red'}}>{error.confirmPassword}</div>}
         </div>
         <button type="submit" className="btn btn-primary">Submit</button>
     </form>

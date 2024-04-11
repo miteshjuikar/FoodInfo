@@ -1,10 +1,12 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import style from './AdvanceSearch.module.css'
 import DropDown from './SubComponents/DropDown';
 import TextBox from './SubComponents/TextBox';
-import { useState  } from 'react'
+import { Link } from 'react-router-dom'
 
 export default function AdvanceSearch() {
+    const [ myUrlData, setMyUrlData ] = useState();
+
     const diet = ["balanced", "high-fiber", "high-protein", "low-carb", "low-fat", "low-sodium"];
 
     const health = ["alcohol-cocktail", "alcohol-free", "celery-free", "crustacean-free", "dairy-free", "DASH", "egg-free", "fish-free", "fodmap-free", "gluten-free", "immuno-supportive", "keto-friendly", "kidney-friendly", "kosher", "low-fat-abs", "low-potassium", "low-sugar", "lupine-free", "Mediterranean", "mollusk-free", "mustard-free", "no-oil-added, paleo", "peanut-free", "pescatarian", "pork-free", "red-meat-free", "sesame-free", "shellfish-free", "soy-free", "sugar-conscious", "sulfite-free", "tree-nut-free", "vegan", "vegetarian", "wheat-free"];
@@ -32,16 +34,14 @@ export default function AdvanceSearch() {
         return params.join('&');
     }
     
-    const handleReset = (e) => {
-        setTextData({ diet:"", health:"", cuisineType:"", mealType:"", dishType:"" ,calories: "", time: "", glycemicIndex:"" })
-    }
-
     const handleAdvanceSubmit = (e) => {
         e.preventDefault()
-        let filteredObject = Object.fromEntries(Object.entries(textData).filter(([_, v]) => v != ""));
-        const myUrlData = objectToUrlParams(filteredObject);
-        console.log(myUrlData);
     }
+    useEffect(() => {
+        let filteredObject = Object.fromEntries(Object.entries(textData).filter(([_, v]) => v != ""));
+        setMyUrlData(objectToUrlParams(filteredObject))
+    },[textData])
+    
 
   return (
     <form className={style.advanceSearch} onSubmit={handleAdvanceSubmit}>
@@ -82,7 +82,9 @@ export default function AdvanceSearch() {
         </div>
         <div className={style.advanceSearchButton} >
             <input className={`btn btn-outline-secondary`} type="Reset" value="Reset"></input>
-            <input className={`btn btn-primary`} type="submit" value="Submit"></input>
+            <Link to={`/searchAd/${myUrlData}`} state={myUrlData} >
+                <input className={`btn btn-primary`} type="submit" value="Submit"></input>
+            </Link>
         </div>
     </form>
   )
