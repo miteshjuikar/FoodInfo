@@ -2,7 +2,7 @@ import React from 'react'
 import style from '../AdvanceSearch.module.css'
 
 
-export default function TextBox({ name, boxId, setTextData, textData, handleChange }) {
+export default function TextBox({ name, boxId, textData, handleChange }) {
     
     // function handleChange(e) {
     //     setTextData((preVal) => ({
@@ -14,7 +14,7 @@ export default function TextBox({ name, boxId, setTextData, textData, handleChan
   return (
     <>
     <div className={style.textBox}>
-        <label htmlFor="basic-url" className="form-label">{name}</label>
+        <label htmlFor="basic-url" className={`form-label ${style.textLabel}`}>{name}</label>
         <div className="input-group">
             <input type="text" 
                     className="form-control" 

@@ -13,7 +13,7 @@ export default function Navbar() {
   return (
     <>
     <nav className={style.navbar1}>
-        <ui>
+        <ul>
             <li className={style.list}>
                 <Link to='/'> 
                     <TiHomeOutline className={style.icon} />
@@ -52,7 +52,7 @@ export default function Navbar() {
                 
             </li>
          
-        </ui>
+        </ul>
        </nav>
     </>
   )

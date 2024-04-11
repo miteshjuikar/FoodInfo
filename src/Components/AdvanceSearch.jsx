@@ -24,29 +24,36 @@ export default function AdvanceSearch() {
         }))
     }
 
+    const handleReset = (e) => {
+        setTextData({ diet:"", health:"", cuisineType:"", mealType:"", dishType:"" ,calories: "", time: "", glycemicIndex:"" })
+    }
     console.log(textData);
+
+    const handleAdvanceSubmit = () => {
+
+    }
   return (
     <div className={style.advanceSearch}>
 
         <div className="container text-center">
         <div className="row">
             <div className="col-6 col-sm-4">
-            <DropDown arrDropName={diet} name={"Diet"} textData={textData} setTextData={setTextData} handleChange={handleChange} />
+            <DropDown arrDropData={diet} name={"Diet"} id="diet" textData={textData} setTextData={setTextData} handleChange={handleChange} />
             </div>
             <div className="col-6 col-sm-4">
-            <DropDown arrDropName={health} name={"Health"} textData={textData} setTextData={setTextData} handleChange={handleChange}  />
+            <DropDown arrDropData={health} name={"Health"} id="health" textData={textData} setTextData={setTextData} handleChange={handleChange}  />
             </div>
             <div className="col-6 col-sm-4">
-            <DropDown arrDropName={cuisineType} name={"Cuisine Type"} textData={textData} setTextData={setTextData} handleChange={handleChange}  /> 
+            <DropDown arrDropData={cuisineType} name={"Cuisine Type"} id="cuisineType" textData={textData} setTextData={setTextData} handleChange={handleChange}  /> 
             </div>
 
             <div className="w-100 d-none d-md-block"></div>
 
             <div className="col-6 col-sm-4">
-            <DropDown arrDropName={mealType} name={"Meal Type"} textData={textData} setTextData={setTextData} handleChange={handleChange}  />
+            <DropDown arrDropData={mealType} name={"Meal Type"} id="mealType" textData={textData} setTextData={setTextData} handleChange={handleChange}  />
             </div>
             <div className="col-6 col-sm-4">
-            <DropDown arrDropName={dishType} name={"Dish Type"} textData={textData} setTextData={setTextData} handleChange={handleChange} />
+            <DropDown arrDropData={dishType} name={"Dish Type"} id="dishType" textData={textData} setTextData={setTextData} handleChange={handleChange} />
             </div>
             
             <div className="w-100 d-none d-md-block"></div>
@@ -61,6 +68,10 @@ export default function AdvanceSearch() {
                 <TextBox name={"GlycemicIndex"} boxId={"glycemicIndex"} textData={textData} setTextData={setTextData} handleChange={handleChange} />
             </div>
         </div>
+        </div>
+        <div className={style.advanceSearchButton} >
+            <input class={`btn btn-outline-secondary`} onClick={handleReset} type="Reset" value="Reset"></input>
+            <input class={`btn btn-primary`} onClick={handleAdvanceSubmit} type="submit" value="Submit"></input>
         </div>
     </div>
   )

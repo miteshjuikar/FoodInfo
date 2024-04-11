@@ -2,19 +2,25 @@
     margin: 0;
     padding: 0;
     position: absolute;
-    top: 4%;
+    top: 4%;  
     bottom: 8%;
     left: 3%;
     width: 60px;
     border-radius: 20px;
-    transition: all 0.2s linear;
+
     box-shadow: 3px 3px rgba(0, 0, 0, 0.1);
-  
+    z-index: 1;
     overflow: hidden;
-    background-color: rgb(205, 206, 207);
-  
-    ui{
+
+    transition: all 0.2s linear;
+
+      background-color: rgba(255, 255, 255, 0.2);
+      /* backdrop-filter: blur(2px) saturate(160%) contrast(45%) brightness(140%);
+      -webkit-backdrop-filter: blur(20px) saturate(160%) contrast(45%) brightness(140%); */
+    
+    ul{
       list-style-type: none;
+      padding: 0%;
     }
     a{
       position: relative;
@@ -24,7 +30,6 @@
       padding: 10px;
       font-size: 16px;
       color: rgb(27, 31, 37);
-      
     }
   
     .icon{
@@ -34,7 +39,6 @@
 
       /* text-align: center; */
     }
-  
     .nav_item{
       position: relative;
       margin-left: 10px;
@@ -50,5 +54,18 @@
   
   nav:hover{
     width: 200px;
+    backdrop-filter: blur(20px) saturate(160%) contrast(45%) brightness(140%);
+    -webkit-backdrop-filter: blur(20px) saturate(160%) contrast(45%) brightness(140%);
+    
   }
+  @supports (-webkit-backdrop-filter: blur(30px) saturate(160%) contrast(45%) brightness(140%)) or
+  (backdrop-filter: blur(30px) saturate(160%) contrast(45%) brightness(140%)) {
+  .navbar-b.navbar-reduce {
+    transition: all 0.5s ease-in-out;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+}
+  
   

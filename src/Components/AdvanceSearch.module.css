@@ -6,13 +6,25 @@
   border-radius: 10px;
   background-color: rgb(216, 222, 222);
 }
-
 .textBox{
     margin: 5px;
     padding: 5px;
-    label{
-        position: relative;
-        left: -140px;
-    }
 } 
+.textLabel{
+  position: relative;
+  left: -120px;
+}
+.advanceSearchButton{
+  display: flex;
+  gap: 20px;
+  margin: 5px;
+  padding: 5px;
+  
+  position: relative;
+  left: 850px;
+  top: 120px;
+  input{
+    width: 100px;
+  }
+}
 

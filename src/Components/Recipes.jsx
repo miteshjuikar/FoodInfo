@@ -31,8 +31,10 @@ export default function Recipes() {
 
   return (
     <>
-    <HoriNavbar msg={msg} setMsg={setMsg} handleSearch={handleSearch} onSearch={onSearch} />
-    { data && <FoodContainer foodCardData={data} /> }
+    <div className='recipesPage'>
+      <HoriNavbar msg={msg} setMsg={setMsg} handleSearch={handleSearch} onSearch={onSearch} />
+      { data && <FoodContainer foodCardData={data} /> }
+    </div>
     </>
   )
 }
