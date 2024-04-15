@@ -1,34 +1,30 @@
 import React, { useState } from 'react'
-import { useParams, Link } from 'react-router-dom'
-import { RecipeData } from "../api";
-import Container from './Container';
-
+import { useParams, Link, useLocation, useSearchParams } from 'react-router-dom'
+import { SingleRecipeData } from "../api";
+import Container from './Container'; 
+import Spinner from './Spinner';
 export default function RecipeDetails() {
-    const param = useParams();
-    const [ arrData, setArrData ] = useState();
+  const [data, setData] = useSearchParams();
+  const singleDataURL = `${data.get("name")}&app_id=5356d460&app_key=000e634ee221f3cc3fe235e57022402b`
+  const [ arrData, setArrData ] = useState();
 
-    function fetchRecipeData(id){
-        React.useEffect(() => {
-            async function resData(){
-                const res = await RecipeData("all");
-                const data = res.hits
-                for(let i=0; i<data.length; i++){
-                    if(id == data[i].recipe.label){
-                      setArrData(data[i])
-                    }
-                }
-            }
-            resData();
-        },[])
-    }
-    fetchRecipeData(param.id);
+React.useEffect(() => {
+  async function resData(){
+    const res = await fetch(singleDataURL);
+    const dataURL = await res.json();
+    setArrData(dataURL)
+  }
+  resData();
+},[])
+
 
   return (
     <>
-    <Link to='..' relative='path'>
+    <Link to='.'>
        <button>Back</button>
     </Link>
-      {arrData && <Container fooditem={arrData}/>}
+    {arrData ? <Container fooditem={arrData}/> : <Spinner />}
+    
     </>
   )
 }

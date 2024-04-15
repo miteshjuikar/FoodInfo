@@ -1,6 +1,6 @@
 import React from 'react'
 import style from './Navbar.module.css'
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 
 import { TiHomeOutline } from "react-icons/ti";
 import { IoFastFoodOutline } from "react-icons/io5";
@@ -8,13 +8,30 @@ import { IoSearch } from "react-icons/io5";
 import { MdOutlineShoppingCart } from "react-icons/md";
 import { MdOutlinePeopleAlt } from "react-icons/md";
 import { IoIosLogOut } from "react-icons/io";
+import { getAuth, signOut } from "firebase/auth";
+import { UserContext } from '../main';
+
 
 export default function Navbar() {
+
+    const navigate = useNavigate();
+    const [ userL ] = React.useContext(UserContext);
+
 
     const activeStyle = {
         fontWeight: "bold",
         backgroundColor: "rgb(245, 245, 248)"
       }
+    function handleLogout(){
+        const auth = getAuth();
+        signOut(auth).then(() => {
+        // Sign-out successful.
+            console.log("logOuthghgf");
+        }).catch((error) => {
+            alert(error)
+        });
+
+    }
   return (
     <>
     <nav className={style.navbar1}>
@@ -50,9 +67,11 @@ export default function Navbar() {
                 </NavLink>
             </li>
             <li>
-                <NavLink to='/' className={style.logout} > 
+                <NavLink to={userL=="user" ? "/logIn" : "/logIn"}
+                         onClick={userL=="user" ? {handleLogout} : ()=> navigate('/logIn') } className={style.logout} 
+                > 
                     <IoIosLogOut className={style.icon} />
-                    <span className={style.nav_item} >Log Out</span>
+                    <span className={style.nav_item} >{userL=="user" ? "logOut" : "logIn"}</span>
                 </NavLink>
                 
             </li>

@@ -18,26 +18,39 @@ import AdvanceSearch from './Components/AdvanceSearch';
 import AdvanceSearchId from './Components/AdvanceSearchId';
 import SignUp from './Components/SignUp';
 import LogIn from './Components/LogIn';
-
+import Authentication from './Components/Authentication';
+import { createContext } from 'react';
+import Cart from './Components/Cart';
 
 
 const router = createBrowserRouter(createRoutesFromElements(
   <Route path="/" element={<Layout />} >
     <Route index element={<Home/>}/>
     <Route path='recipes' element={<Recipes />} />
-    <Route path='recipes/:id' element={<RecipeDetails />} />
+    <Route path='recipeDetail' element={<RecipeDetails />} />
     <Route path='searchAd' element={<AdvanceSearch /> } />
     <Route path='searchAd/:id' element={<AdvanceSearchId /> } />
     <Route path='signUp' element={<SignUp /> } />
-    <Route path='logIn' element={<LogIn /> } />
-    <Route path='cart' element={<h1>Cart Page</h1>} />
-    <Route path='about' element={<h1>About Us</h1>} />
+    <Route path='logIn' element={<LogIn />} />
+    <Route element={<Authentication />}>
+        <Route path='cart' element={<Cart />} />
+        <Route path='about' element={<h1>About Us</h1>} />
+    </Route>
+    
   </Route>
 ))
 
+export const UserContext = createContext()
+
 function App() {
+  const [ userL , setUserL ] = React.useState(null)
   return(
-    <RouterProvider router={router} />
+
+
+     <UserContext.Provider value={[userL, setUserL]}> 
+        <RouterProvider router={router} />
+     </UserContext.Provider>
+
   )
 }
 

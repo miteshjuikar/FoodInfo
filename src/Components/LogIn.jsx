@@ -1,14 +1,21 @@
-import React, {useState} from 'react'
+import React, {useContext, useState} from 'react'
 import { useNavigate } from 'react-router-dom'
 import style from './SignUp.module.css'
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import {auth} from './firebase'
+import { UserContext } from '../main';
+import { useOutletContext } from "react-router-dom"
 
-export default function LogIn() {
-
+export default function LogIn( { data }) {
     const [formData, setFormData] = useState({email:"", password:""});
+    const [ submit, setSubmit ] = useState(true);
     const navigate = useNavigate();
-  
+
+    const msg = useOutletContext()
+    console.log(msg);
+    const [userL, setUserL] = useContext(UserContext);
+    
+ 
     function handleChange(e){
       setFormData((pre) => ({
         ...pre,
@@ -22,10 +29,13 @@ export default function LogIn() {
     const handleSubmit = (e) => {
         e.preventDefault()
         async function logInData(){
+            setSubmit(false)
             signInWithEmailAndPassword(auth, email, password)
                 .then((userCredential) => {
             const user = userCredential.user;
-            
+            setSubmit(true)
+            setUserL("user")
+            navigate("/recipes")
             })
             .catch((error) => {
                 const errorCode = error.code;
@@ -63,7 +73,12 @@ export default function LogIn() {
             />
         </div>
     
-        <button type="submit" className="btn btn-primary">Submit</button>
+        <button type="submit" 
+                className="btn btn-primary" 
+                disabled={!submit}
+        >
+          {submit ? "Submit" : "submitting"}
+        </button>
     </form>
     </div>
   )

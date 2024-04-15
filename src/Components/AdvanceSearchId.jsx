@@ -7,7 +7,7 @@ import Spinner from './Spinner';
 
 export default function AdvanceSearchId() { 
     const [ data, setData ] = useState();
-    const [ searchFil, setSearchFil ] = useState("all");
+    const [ searchFil, setSearchFil ] = useState("q=all");
     const [ loading, setLoading ] = useState(false);
     const location = useLocation();
 
@@ -15,6 +15,8 @@ export default function AdvanceSearchId() {
       setSearchFil(location.state)
     },[location])
     
+    console.log(searchFil);
+
     React.useEffect(() => {
         async function resData(){
           setLoading(false)

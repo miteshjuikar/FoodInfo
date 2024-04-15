@@ -1,5 +1,56 @@
-.recipeContainer{
-    margin-top: 25px;
-    margin-left: 150px;
-   
+.recipeDetailMainDiv{
+    margin: 10px;
+    padding: 10px;
+    position: relative;
+    left: 10%;
+    height: 90vh;
+    width: 88vw;
+    background-color: aqua;
+}
+.recipeImg{
+    border-radius: 10px;
+}
+.recipeimgLab{
+    display: flex;
+    gap: 100px;
+}
+.buttonStyle{
+    width: 100px;
+    position: relative;
+    left: 250px;
+    top: 50px;
+}
+.col{
+    margin: 10px;
+    padding: 10px;
+}
+.nutrition{
+    table{
+        display: flex;
+        flex-direction: column;
+    }
+    tr{
+        display: flex;
+        gap: 50px;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.tableStyle{
+    background-color: aqua;
 }

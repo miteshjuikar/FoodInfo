@@ -2,11 +2,11 @@ import React, { useEffect, useState } from 'react'
 import style from './AdvanceSearch.module.css'
 import DropDown from './SubComponents/DropDown';
 import TextBox from './SubComponents/TextBox';
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 export default function AdvanceSearch() {
     const [ myUrlData, setMyUrlData ] = useState();
-
+    const navigate = useNavigate();
     const diet = ["balanced", "high-fiber", "high-protein", "low-carb", "low-fat", "low-sodium"];
 
     const health = ["alcohol-cocktail", "alcohol-free", "celery-free", "crustacean-free", "dairy-free", "DASH", "egg-free", "fish-free", "fodmap-free", "gluten-free", "immuno-supportive", "keto-friendly", "kidney-friendly", "kosher", "low-fat-abs", "low-potassium", "low-sugar", "lupine-free", "Mediterranean", "mollusk-free", "mustard-free", "no-oil-added, paleo", "peanut-free", "pescatarian", "pork-free", "red-meat-free", "sesame-free", "shellfish-free", "soy-free", "sugar-conscious", "sulfite-free", "tree-nut-free", "vegan", "vegetarian", "wheat-free"];
@@ -34,14 +34,24 @@ export default function AdvanceSearch() {
         return params.join('&');
     }
     
-    const handleAdvanceSubmit = (e) => {
-        e.preventDefault()
-    }
     useEffect(() => {
         let filteredObject = Object.fromEntries(Object.entries(textData).filter(([_, v]) => v != ""));
-        setMyUrlData(objectToUrlParams(filteredObject))
+        const para = objectToUrlParams(filteredObject)
+        console.log(para);
+        if(para == ""){
+            setMyUrlData("q=all")
+        }
+        else{
+            setMyUrlData(objectToUrlParams(filteredObject))
+        }
+        
     },[textData])
     
+    const handleAdvanceSubmit = (e) => {
+        e.preventDefault()
+        //console.log(`/searchAd/${myUrlData}`);
+        navigate(`/searchAd/${myUrlData}`)
+    }
 
   return (
     <form className={style.advanceSearch} onSubmit={handleAdvanceSubmit}>
@@ -79,12 +89,13 @@ export default function AdvanceSearch() {
                 <TextBox name={"GlycemicIndex"} boxId={"glycemicIndex"} textData={textData} setTextData={setTextData} handleChange={handleChange} />
             </div>
         </div>
-        </div>
         <div className={style.advanceSearchButton} >
-            <input className={`btn btn-outline-secondary`} type="Reset" value="Reset"></input>
-            <Link to={`/searchAd/${myUrlData}`} state={myUrlData} >
-                <input className={`btn btn-primary`} type="submit" value="Submit"></input>
-            </Link>
+        <button className={`btn btn-outline-secondary`} type="Reset" value="Reset" >Reset</button>
+        <button className={`btn btn-outline-primary`} 
+                type="Submit" 
+                value="Submit"         
+        >Submit</button>
+        </div> 
         </div>
     </form>
   )

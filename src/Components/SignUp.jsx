@@ -8,7 +8,7 @@ import Validation from './Validation'
 export default function SignUp() {
   const [formData, setFormData] = useState({email:"", password:"", confirmPassword: "", name: ""});
   const [ error, setError ] = useState({email:"", password:"", confirmPassword: "", name: ""});
-  const [ signIn, setSignIn ] = useState(false);
+  const [ submit, setSubmit ] = useState(true);
   const navigate = useNavigate();
 
   function handleChange(e){
@@ -27,16 +27,17 @@ export default function SignUp() {
   useEffect(() => {
     if(Object.keys(error).length === 0){
       async function hitSign(){
-        createUserWithEmailAndPassword(auth, email, password)
+        setSubmit(false)
+          createUserWithEmailAndPassword(auth, email, password)
           .then((userCredential) => {
           const user = userCredential.user;
-          setSignIn(true)
+          setSubmit(true)
           navigate("/logIn")
         })
         .catch((error) => {
           const errorCode = error.code;
           const errorMessage = error.message;
-          setSignIn(false)
+          setSubmit(true)
           alert(errorCode, errorMessage);
         });
       }
@@ -93,7 +94,12 @@ export default function SignUp() {
             />
             {error.confirmPassword && <div className="form-text" style={{color: 'red'}}>{error.confirmPassword}</div>}
         </div>
-        <button type="submit" className="btn btn-primary">Submit</button>
+        <button type="submit"
+               className="btn btn-primary"
+               disabled={!submit}
+        >
+          {submit ? "Submit" : "submitting"}
+        </button>
     </form>
     </div>
   )
