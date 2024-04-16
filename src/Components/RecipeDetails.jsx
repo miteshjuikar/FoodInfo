@@ -7,7 +7,7 @@ export default function RecipeDetails() {
   const [data, setData] = useSearchParams();
   const singleDataURL = `${data.get("name")}&app_id=5356d460&app_key=000e634ee221f3cc3fe235e57022402b`
   const [ arrData, setArrData ] = useState();
-
+console.log(singleDataURL);
 React.useEffect(() => {
   async function resData(){
     const res = await fetch(singleDataURL);
@@ -16,7 +16,6 @@ React.useEffect(() => {
   }
   resData();
 },[])
-
 
   return (
     <>

@@ -15,7 +15,7 @@ export default function RecipesList({recipesListData}) {
     // }
    navigate(`/recipeDetail?name=${id}`)
   }
- 
+ console.log(recipesListData);
   return (
     <div className={style.foodContainer}>
 
