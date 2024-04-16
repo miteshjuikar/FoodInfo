@@ -37,7 +37,6 @@ export default function AdvanceSearch() {
     useEffect(() => {
         let filteredObject = Object.fromEntries(Object.entries(textData).filter(([_, v]) => v != ""));
         const para = objectToUrlParams(filteredObject)
-        console.log(para);
         if(para == ""){
             setMyUrlData("q=all")
         }
@@ -49,7 +48,6 @@ export default function AdvanceSearch() {
     
     const handleAdvanceSubmit = (e) => {
         e.preventDefault()
-        //console.log(`/searchAd/${myUrlData}`);
         navigate(`/searchAd/${myUrlData}`)
     }
 

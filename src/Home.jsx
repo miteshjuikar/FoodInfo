@@ -14,7 +14,7 @@ export default function Home() {
         <h1>Register with us</h1>
         <div className='buttonDiv'>
           <button className={`btn btn-outline-secondary ${style.buttonStyle}`} onClick={() => {navigate('/signUp')}} >Sign-Up</button>
-         {userL==null && <button className={`btn btn-outline-secondary ${style.buttonStyle}`} onClick={() => {navigate('/logIn')}} >Log In</button>}
+         {!userL && <button className={`btn btn-outline-secondary ${style.buttonStyle}`} onClick={() => {navigate('/logIn')}} >Log In</button>}
         </div>  
     </div>
     </>

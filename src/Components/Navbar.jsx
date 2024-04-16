@@ -26,7 +26,7 @@ export default function Navbar() {
         const auth = getAuth();
         signOut(auth).then(() => {
         // Sign-out successful.
-            console.log("logOuthghgf");
+
         }).catch((error) => {
             alert(error)
         });
@@ -67,11 +67,11 @@ export default function Navbar() {
                 </NavLink>
             </li>
             <li>
-                <NavLink to={userL=="user" ? "/logIn" : "/logIn"}
-                         onClick={userL=="user" ? {handleLogout} : ()=> navigate('/logIn') } className={style.logout} 
+                <NavLink to="/logIn"
+                    onClick={!userL ? ()=> navigate('/logIn') : {handleLogout} } className={style.logout} 
                 > 
                     <IoIosLogOut className={style.icon} />
-                    <span className={style.nav_item} >{userL=="user" ? "logOut" : "logIn"}</span>
+                    <span className={style.nav_item} >{!userL ? "logIn" : "logOut" }</span>
                 </NavLink>
                 
             </li>

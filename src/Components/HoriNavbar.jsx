@@ -6,7 +6,7 @@ import { UserContext } from '../main';
 
 export default function HoriNavbar( { msg, setMsg, handleSearch,onSearch } ) { 
   const [userL] = React.useContext(UserContext);
-console.log(userL);
+
   return (
     <>
     <div className={style.horiNav}>
@@ -14,9 +14,9 @@ console.log(userL);
         <h4>Recipes</h4>
       </div>
         <div className={style.horiButton}>
-          {userL=="user" ? null : <Link to='/logIn'>
-              <button className="btn btn-outline-secondary" type="button" id="button-addon2">LogIn</button>
-          </Link>}
+          {!userL ? <Link to='/logIn'>
+            <button className="btn btn-outline-secondary" type="button" id="button-addon2">LogIn</button>
+          </Link> : null}
           <div>
           <div className="input-group mb-3">
               <input type="text" 

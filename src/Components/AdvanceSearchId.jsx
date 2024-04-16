@@ -2,20 +2,18 @@ import React, { useEffect } from 'react'
 import RecipesList from './RecipesList';
 import { RecipeData } from "../api";
 import { useState } from 'react';
-import { useLocation } from 'react-router-dom'
+import { useLocation, useParams } from 'react-router-dom'
 import Spinner from './Spinner';
 
 export default function AdvanceSearchId() { 
     const [ data, setData ] = useState();
-    const [ searchFil, setSearchFil ] = useState("q=all");
+    const [ searchFil, setSearchFil ] = useState();
     const [ loading, setLoading ] = useState(false);
-    const location = useLocation();
+    const location = useParams();
 
     useEffect(() => {
-      setSearchFil(location.state)
+      setSearchFil(location.id)
     },[location])
-    
-    console.log(searchFil);
 
     React.useEffect(() => {
         async function resData(){

@@ -2,9 +2,7 @@ import React from 'react'
 import style from '../AdvanceSearch.module.css'
 
 export default function DropDown( { arrDropData, name, id, textData, handleChange}) {
-    const handleChangeDrop = (e) => {
-        console.log(e.target.id, e.target.value);
-    }
+ 
   return (
     <>
         <div className={style.textBox}>

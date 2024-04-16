@@ -1,12 +1,19 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import style from './Container.module.css'
 import { Link } from 'react-router-dom'
+import { UserContext, UserLogInData } from '../main';
+import { v4 as uuidv4 } from 'uuid';
+
+import { getDocs, setDoc } from 'firebase/firestore';
+import {doc, collection, onSnapshot } from "firebase/firestore";
+import { db } from './firebase';
 
 export default function Container({fooditem}) {
   const [flag, setFlag] = React.useState(false);
   const recipeData = fooditem.recipe
-  console.log(recipeData);
-
+  const [ logInData, setLogInData] = React.useContext(UserLogInData);
+  const [ recipesListData, setRecipesListData ] = React.useState();
+  const [ userL ] = React.useContext(UserContext);
 
   const digestList = recipeData.digest.map((data) => {
     return (
@@ -30,6 +37,82 @@ export default function Container({fooditem}) {
     )
   })
 
+  
+  const handleSave = () => {
+    let newData = fooditem._links.self.href
+    if (logInData.includes(newData)){
+      alert("Recipe already saveed");
+    }
+    else{
+      const newDataArray = [...logInData, newData];
+      setLogInData(newDataArray);
+    }
+    
+  } 
+
+  // Fetching previous data
+  const userCartData = collection(db, "cart")
+
+  React.useEffect(() => {
+    const getContacts = async () => {
+      try {
+        onSnapshot(userCartData, (snapshot) => {
+          const userData = snapshot.docs.map((doc) => {
+            return {
+              id: userL,
+              ...doc.data(),
+            };
+          });
+          userData.map((data) => {
+            if(data.id == userL){
+              setRecipesListData(data)
+              setLogInData(data.logInData)
+            }
+          })
+        });
+      } catch (error) {
+        alert(error);
+      }
+    };
+    getContacts();
+  }, []);
+
+  //code to add data
+
+  useEffect(() => {
+    const addData = async() =>{
+      if(logInData.length>0){
+        const newData = {
+          id: userL,
+          ...{logInData}
+        }
+        try{
+          console.log("data Added");
+          const userData = doc(userCartData, newData.id);
+          await setDoc( userData, newData );
+        }
+        catch(err){
+          alert(err);
+        }
+      }
+    }
+    addData();
+  },[logInData])
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 return (
 <>
   <div className={style.recipeDetailMainDiv}>
@@ -43,7 +126,7 @@ return (
         <h1>{recipeData.label}</h1>
         <p>See full recipe on:<Link to={recipeData.url}>Bon Appetit</Link>
         </p>
-        <button className={`btn btn-outline-secondary ${style.buttonStyle}`}>Save </button>
+        <button className={`btn btn-outline-secondary ${style.buttonStyle}`} onClick={handleSave}>Save </button>
       </div>
       </div>
     </div>

@@ -40,16 +40,19 @@ const router = createBrowserRouter(createRoutesFromElements(
   </Route>
 ))
 
+export const UserLogInData = createContext()
 export const UserContext = createContext()
 
 function App() {
+  const [ logInData, setLogInData ] = React.useState([])
   const [ userL , setUserL ] = React.useState(null)
   return(
 
-
+    <UserLogInData.Provider value={[ logInData, setLogInData ]} >
      <UserContext.Provider value={[userL, setUserL]}> 
         <RouterProvider router={router} />
      </UserContext.Provider>
+    </UserLogInData.Provider>
 
   )
 }

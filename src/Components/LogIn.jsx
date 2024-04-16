@@ -12,7 +12,7 @@ export default function LogIn( { data }) {
     const navigate = useNavigate();
 
     const msg = useOutletContext()
-    console.log(msg);
+
     const [userL, setUserL] = useContext(UserContext);
     
  
@@ -34,7 +34,7 @@ export default function LogIn( { data }) {
                 .then((userCredential) => {
             const user = userCredential.user;
             setSubmit(true)
-            setUserL("user")
+            setUserL(user.uid)
             navigate("/recipes")
             })
             .catch((error) => {
