@@ -1,0 +1,74 @@
+.pageContent{
+    display: flex;
+    position: relative;
+    left: 150px;
+    /* top: 10px; */
+    margin: 10px;
+    padding: 10px;
+    gap: 10px;
+}
+.newDiv{
+    width: 50%;
+    background-color: aliceblue;
+    border-radius: 10px;
+}
+
+.imageSection{
+    height: 150px;
+    width: 440px;
+    background-color: rgb(205, 206, 207);
+    border-radius: 5px;
+    padding: 10px;
+    display: flex;
+    margin: 10px;
+    img{
+        height: 130px;
+        width: 130px;
+    }
+}
+  .Content{
+    margin: auto;
+    padding: 10px;
+    h1{
+        padding-left: 10px;
+        font-size: 20px
+      }
+    a{
+        color: black;
+    }
+    a:hover {
+        background-color: transparent; /* Set the background color to transparent */
+    }
+  }
+  .upperLink{
+    width: 250px;
+  }
+  .para{
+    justify-content: space-between;
+    p{
+      display: table;
+      margin: 5px;
+      padding: 5px;
+      border: 1px solid black;
+      border-radius: 5px;
+    }
+
+    display: flex;
+    font-size: 14px;
+  }
+
+  .recipeLink{
+    margin-left: 2px;
+    padding: 2px;
+    padding-left: 8px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+
+    button{
+            width: 100px;
+            position: relative;
+            left: 2px;
+    }
+  }
+ 

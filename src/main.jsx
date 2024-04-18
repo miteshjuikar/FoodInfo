@@ -33,8 +33,8 @@ const router = createBrowserRouter(createRoutesFromElements(
     <Route path='signUp' element={<SignUp /> } />
     <Route path='logIn' element={<LogIn />} />
     <Route element={<Authentication />}>
-        <Route path='cart' element={<Cart />} />
     </Route>
+        <Route path='cart' element={<Cart />} />
         <Route path='about' element={<h1>About Us</h1>} />
     
   </Route>

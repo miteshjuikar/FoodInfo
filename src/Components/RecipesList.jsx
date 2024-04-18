@@ -1,21 +1,11 @@
 import React from 'react'
 import style from './RecipesList.module.css'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import Container from './Container';
 
 
 export default function RecipesList({recipesListData}) {
 
-  const navigate = useNavigate();
-
-
-  function handleRecipeSerach(id) {
-    // if(i>=0 && i<=20){
-    //   return(<Container fooditem={recipesListData[i]} />)
-    // }
-   navigate(`/recipeDetail?name=${id}`)
-  }
- console.log(recipesListData);
   return (
     <div className={style.foodContainer}>
 

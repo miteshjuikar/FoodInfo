@@ -37,20 +37,8 @@ export default function Container({fooditem}) {
     )
   })
 
-  
-  const handleSave = () => {
-    let newData = fooditem._links.self.href
-    if (logInData.includes(newData)){
-      alert("Recipe already saveed");
-    }
-    else{
-      const newDataArray = [...logInData, newData];
-      setLogInData(newDataArray);
-    }
-    
-  } 
-
   // Fetching previous data
+
   const userCartData = collection(db, "cart")
 
   React.useEffect(() => {
@@ -77,7 +65,8 @@ export default function Container({fooditem}) {
     getContacts();
   }, []);
 
-  //code to add data
+
+  //code to add data to user card
 
   useEffect(() => {
     const addData = async() =>{
@@ -87,7 +76,6 @@ export default function Container({fooditem}) {
           ...{logInData}
         }
         try{
-          console.log("data Added");
           const userData = doc(userCartData, newData.id);
           await setDoc( userData, newData );
         }
@@ -98,20 +86,18 @@ export default function Container({fooditem}) {
     }
     addData();
   },[logInData])
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+ 
+  const handleSave = () => {
+    let newData = fooditem._links.self.href
+    if (logInData.includes(newData)){
+      alert("Recipe already saveed");
+    }
+    else{
+      const newDataArray = [...logInData, newData];
+      setLogInData(newDataArray);
+    }
+    
+  } 
 
 return (
 <>
