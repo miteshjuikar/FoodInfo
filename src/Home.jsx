@@ -10,11 +10,11 @@ export default function Home() {
   
   return (
     <>
-    <div className="homePage">
+    <div className={style.homePage}>
         <h1>Register with us</h1>
         <div className='buttonDiv'>
-          <button className={`btn btn-outline-secondary ${"buttonStyle"}`} onClick={() => {navigate('/signUp')}} >Sign-Up</button>
-         {!userL && <button className={`btn btn-outline-secondary ${"buttonStyle"}`} onClick={() => {navigate('/logIn')}} >Log In</button>}
+          <button className={`btn btn-outline-secondary ${style.buttonStyle}`} onClick={() => {navigate('/signUp')}} >Sign-Up</button>
+         {!userL && <button className={`btn btn-outline-secondary ${style.buttonStyle}`} onClick={() => {navigate('/logIn')}} >Log In</button>}
         </div>  
     </div>
     </>
