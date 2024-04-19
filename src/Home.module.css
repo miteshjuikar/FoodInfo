@@ -3,7 +3,7 @@
     height: 100%;
     overflow: hidden;
     position: relative;
-    background-image: url('./bgImg1.jpg');
+    background-image: url('../bgImg1.jpg');
     background-size: cover;
     height: 100vh;
     display: flex;
