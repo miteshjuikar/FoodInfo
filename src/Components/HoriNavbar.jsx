@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { IoSearch } from "react-icons/io5";
 import { UserContext } from '../main';
 
-export default function HoriNavbar( { msg, setMsg, handleSearch,onSearch } ) { 
+export default function HoriNavbar( { msg, setMsg, handleSearch,handleKeyPress,onSearch } ) { 
   const [userL] = React.useContext(UserContext);
 
   return (
@@ -25,9 +25,10 @@ export default function HoriNavbar( { msg, setMsg, handleSearch,onSearch } ) {
                   aria-label="Search Recipe"      
                   aria-describedby="button-addon2" 
                   onChange={handleSearch}
+                  onKeyPress={handleKeyPress}
                   value={msg}/>
               <button className="btn btn-outline-secondary"
-                      type="button" 
+                      type="search" 
                       id="button-addon2" 
                       onClick={onSearch}
               >

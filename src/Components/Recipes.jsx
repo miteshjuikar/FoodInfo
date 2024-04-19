@@ -11,13 +11,20 @@ export default function Recipes() {
     const [ loading, setLoading ] = useState(false);
     const [ msg, setMsg ] = useState();
 
+
+    const handleKeyPress = (event) => {
+      if (event.key === 'Enter') {
+        onSearch();
+      }
+    };
+
     function handleSearch(e){
       setMsg(e.target.value);
     }
-
+    
     function onSearch(){
       if(msg){
-        setSearchFil(msg)
+        setSearchFil(`q=${msg}`)
       }
       else{
         setSearchFil("q=all")
@@ -37,7 +44,7 @@ export default function Recipes() {
   return (
     <>
     <div className='recipesPage'>
-      <HoriNavbar msg={msg} setMsg={setMsg} handleSearch={handleSearch} onSearch={onSearch} />
+      <HoriNavbar msg={msg} setMsg={setMsg} handleSearch={handleSearch} handleKeyPress={handleKeyPress} onSearch={onSearch} />
       { !loading ? <Spinner /> : <RecipesList recipesListData={data} /> }  
     </div>
     </>

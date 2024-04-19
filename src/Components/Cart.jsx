@@ -15,6 +15,7 @@ export default function Cart() {
   const userCartData = collection(db, "cart")
 
   // const userL = "JyZixJGMSZVde28nCBzgHMoEvqT2"
+
   React.useEffect(() => {
     const getContacts = async () => {
       const usernameQuery = query(userCartData, where('id', '==', userL));
@@ -59,44 +60,88 @@ if(recipesListData){
   recipeData = parseStringObjects(recipesListData);
 }
 
-//Removing URL from saveURL by passing index number of cart recipe
+
+// Call function to delete array element
 const removeSavedRecipe = (indexToRemove) => {
-  setSavedURL(prevData => ({
-    ...prevData,
-    logInData: prevData.logInData.filter((_, index) => index !== indexToRemove)
-  }));
+  deleteElementFromArray(userL, "logInData", indexToRemove);
 };
+
+// Delete element from array
+
+function deleteElementFromArray(documentId, arrayFieldName, indexToDelete) {
+  const firestore = getFirestore();
+  const docRef = doc(getFirestore(), "cart", documentId);
+
+    getDoc(docRef)
+          .then((docSnapshot) => {
+              if (docSnapshot.exists()) {
+                  let cartData = docSnapshot.data();
+
+                  if (Array.isArray(cartData[arrayFieldName])) {
+                    const newArray = [...cartData[arrayFieldName]];
+                    newArray.splice(indexToDelete, 1);
+                    setSavedURL({ [arrayFieldName]: newArray });
+                    return updateDoc(docRef, { [arrayFieldName]: newArray });
+                  } else {
+                    console.log('The specified field is not an array.');
+                  }
+              } else {
+                  console.error("Document does not exist");
+              }
+        })
+        .then(() => {
+            console.log("Array updated successfully");
+        })
+        .catch((error) => {
+            alert("Error updating array:", error);
+        });
+}
+
+
+
+
+
+
+
+
+
+// //Removing URL from saveURL by passing index number of cart recipe
+// const removeSavedRecipe = (indexToRemove) => {
+//   setSavedURL(prevData => ({
+//     ...prevData,
+//     logInData: prevData.logInData.filter((_, index) => index !== indexToRemove)
+//   }));
+// };
   
 
-// update array
+// // update array
+// function updatedInArray(){
+//   if(userL){
+//   const documentId = userL
+//   const docRef = doc(getFirestore(), "cart", documentId);
+//   getDoc(docRef)
+//       .then((docSnapshot) => {
+//           if (docSnapshot.exists()) {
+//               let data = docSnapshot.data();
 
-function updatedInArray(){
-  if(userL){
-  const documentId = userL
-  const docRef = doc(getFirestore(), "cart", documentId);
-  getDoc(docRef)
-      .then((docSnapshot) => {
-          if (docSnapshot.exists()) {
-              let data = docSnapshot.data();
+//   // Step 2: Update the Array
+//   // For example, let's add a new element to the array
+//               // data.logInData.push("new element"); 
 
-  // Step 2: Update the Array
-  // For example, let's add a new element to the array
-              // data.logInData.push("new element"); 
-
-              // Step 3: Write the Updated Array to Firestore
-              return updateDoc(docRef, savedURL);             // saveURL is the updated array
-          } else {
-              console.error("Document does not exist");
-          }
-      })
-      .then(() => {
-          console.log("Array updated successfully");
-      })
-      .catch((error) => {
-          console.error("Error updating array:", error);
-      });
-    }
-  }
+//               // Step 3: Write the Updated Array to Firestore
+//               return updateDoc(docRef, savedURL);             // saveURL is the updated array
+//           } else {
+//               console.error("Document does not exist");
+//           }
+//       })
+//       .then(() => {
+//           console.log("Array updated successfully");
+//       })
+//       .catch((error) => {
+//           console.error("Error updating array:", error);
+//       });
+//     }
+//   }
 
 
   
@@ -129,7 +174,7 @@ function updatedInArray(){
       </div>       
      
       <div className={style.newDiv}>
-        <button className={`btn btn-outline-secondary`} onClick={updatedInArray}>update to firebase </button>
+        {/* <button className={`btn btn-outline-secondary`} onClick={updatedInArray}>update to firebase </button> */}
       </div>
 
     </div>
