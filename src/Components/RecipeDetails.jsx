@@ -19,7 +19,7 @@ React.useEffect(() => {
 
   return (
     <>
-    <Link to='.'>
+    <Link to='..'>
        <button>Back</button>
     </Link>
     {arrData ? <Container fooditem={arrData}/> : <Spinner />}

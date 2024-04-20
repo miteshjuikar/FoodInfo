@@ -88,8 +88,8 @@ export default function AdvanceSearch() {
             </div>
         </div>
         <div className={style.advanceSearchButton} >
-        <button className={`btn btn-outline-secondary`} type="Reset" value="Reset" >Reset</button>
-        <button className={`btn btn-outline-primary`} 
+        <button className={`btn btn-outline-secondary ${style.logInButton}`} type="Reset" value="Reset" >Reset</button>
+        <button className={`btn btn-outline-primary ${style.logInButton}`} 
                 type="Submit" 
                 value="Submit"         
         >Submit</button>

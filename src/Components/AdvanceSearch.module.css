@@ -1,10 +1,10 @@
 .advanceSearch{
   margin-top: 2.5%;
   margin-left: 10%;
-  height: 85vh;
+  height: 500px;
   width: 88vw;
   border-radius: 10px;
-  background-color: rgb(216, 222, 222);
+  background-color: rgb(185, 209, 235);
 }
 .textBox{
     margin: 5px;
@@ -26,5 +26,18 @@
   input{
     width: 100px;
   }
+}
+.textBoxInput{
+  background-color: transparent;
+  background-color: rgb(170, 194, 226);
+  border: none;
+  border: 1px solid rgb(143, 143, 221);
+  color: rgb(79, 79, 158);
+}
+.logInButton{
+  height: 38px;
+  border: none;
+  border: 1px solid rgb(79, 79, 158);
+  color: rgb(79, 79, 158);
 }
 

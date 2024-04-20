@@ -17,7 +17,7 @@ export default function TextBox({ name, boxId, textData, handleChange }) {
         <label htmlFor="basic-url" className={`form-label ${style.textLabel}`}>{name}</label>
         <div className="input-group">
             <input type="text" 
-                    className="form-control" 
+                    className={`form-control ${style.textBoxInput}`} 
                     id={boxId} 
                     aria-describedby="basic-addon3 basic-addon4" 
                     value={textData.boxId}

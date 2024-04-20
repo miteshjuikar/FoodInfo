@@ -7,7 +7,7 @@ export default function DropDown( { arrDropData, name, id, textData, handleChang
     <>
         <div className={style.textBox}>
             <label htmlFor="dropDownInput" className={`form-label ${style.textLabel}`}>{name}</label>
-            <select className={`form-select`} id={id} onChange={handleChange} >
+            <select className={`form-select ${style.textBoxInput}`} id={id} onChange={handleChange} >
                 <option defaultValue={"Select"}>Select</option>
                 {arrDropData.map((dropVal) => (<option key={dropVal} >{dropVal}</option>))}
             </select>

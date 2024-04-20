@@ -5,7 +5,7 @@ import { UserContext } from '../main';
 
 export default function Authentication() {
     const [userL] = React.useContext(UserContext);
-
+   
     if(userL){
         return <Outlet />
     }

@@ -16,9 +16,29 @@
 }
 .searchIcon{
     font-size: 20px;
+    color: rgb(79, 79, 158);
+    
 }
 .serchName{
     height: 40px;
+    background-color: transparent;
+    border: none;
+    border: 1px solid rgb(79, 79, 158);
+    border-radius: 10px
+}
+.searchBox{
+    background-color: transparent;
+    border: none;
+}
+.searchBoxMain{
+    border: 1px solid rgb(79, 79, 158);
+    border-radius: 10px;
+}
+.logInButton{
+    height: 42px;
+    border: none;
+    border: 1px solid rgb(79, 79, 158);
+    color: rgb(79, 79, 158);
 }
 
 

@@ -1,11 +1,13 @@
 import React from 'react'
 import style from './HoriNavbar.module.css'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { IoSearch } from "react-icons/io5";
 import { UserContext } from '../main';
 
 export default function HoriNavbar( { msg, setMsg, handleSearch,handleKeyPress,onSearch } ) { 
   const [userL] = React.useContext(UserContext);
+  const navigate = useNavigate();
+
 
   return (
     <>
@@ -14,13 +16,18 @@ export default function HoriNavbar( { msg, setMsg, handleSearch,handleKeyPress,o
         <h4>Recipes</h4>
       </div>
         <div className={style.horiButton}>
-          {!userL ? <Link to='/logIn'>
-            <button className="btn btn-outline-secondary" type="button" id="button-addon2">LogIn</button>
-          </Link> : null}
+          {!userL ? 
+              <button className={`btn btn-outline-secondary ${style.logInButton}`} 
+                      type="button"
+                      id="button-addon2"
+                      onClick={()=> navigate('/logIn')}
+              >
+                LogIn</button>
+           : null}
           <div>
-          <div className="input-group mb-3">
+          <div className={`input-group mb-3 ${style.searchBoxMain}`}>
               <input type="text" 
-                  className="form-control" 
+                  className={`form-control  ${style.searchBox}`} 
                   placeholder="Search Recipe" 
                   aria-label="Search Recipe"      
                   aria-describedby="button-addon2" 

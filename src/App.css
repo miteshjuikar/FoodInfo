@@ -7,6 +7,7 @@
   display: flex;
   flex-direction: column;
   /* background-image: url('./assets/img2.jpg'); */
+  background-image: linear-gradient(to right, #b6fbff, #83a4d4);
 }
 
 .spinner{

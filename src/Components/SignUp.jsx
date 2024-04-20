@@ -46,6 +46,11 @@ export default function SignUp() {
   },[error])
 
   return (
+    <div className={style.mainLogIn}>
+    <div className={style.sideText}>
+      <h2>Looks like you're new here!</h2>
+      <p>Sign up with your email to get started</p>
+    </div>
     <div className={style.logInForm}>
     <form onSubmit={handleSubmit}>
         <div className="mb-3">
@@ -101,6 +106,7 @@ export default function SignUp() {
           {submit ? "Submit" : "submitting"}
         </button>
     </form>
+    </div>
     </div>
   )
 }

@@ -1,5 +1,5 @@
 import React, {useContext, useState} from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import style from './SignUp.module.css'
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import {auth} from './firebase'
@@ -10,6 +10,8 @@ export default function LogIn( { data }) {
     const [formData, setFormData] = useState({email:"", password:""});
     const [ submit, setSubmit ] = useState(true);
     const navigate = useNavigate();
+
+    const location = useLocation();
 
     const msg = useOutletContext()
 
@@ -35,7 +37,7 @@ export default function LogIn( { data }) {
             const user = userCredential.user;
             setSubmit(true)
             setUserL(user.uid)
-            navigate("/recipes")
+            (location.pathname)=='/logIn' ? navigate('/recipes') : navigate(location.pathname)  
             })
             .catch((error) => {
                 const errorCode = error.code;
@@ -48,6 +50,11 @@ export default function LogIn( { data }) {
 
 
   return (
+  <div className={style.mainLogIn}>
+    <div className={style.sideText}>
+      <h2>LogIn</h2>
+      <p>Save Recipe to your cart<br/>Get access to your cart</p>
+    </div>
     <div className={style.logInForm}>
     <form onSubmit={handleSubmit}>
         <div className="mb-3">
@@ -70,16 +77,17 @@ export default function LogIn( { data }) {
                     value={formData.password} 
                     placeholder='Enter password'
                     onChange={handleChange}
-            />
+                    />
         </div>
     
         <button type="submit" 
                 className="btn btn-primary" 
                 disabled={!submit}
-        >
+                >
           {submit ? "Submit" : "submitting"}
         </button>
     </form>
     </div>
+  </div>
   )
 }
