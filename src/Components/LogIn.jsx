@@ -5,6 +5,7 @@ import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import {auth} from './firebase'
 import { UserContext } from '../main';
 import { useOutletContext } from "react-router-dom"
+import { Alert } from 'bootstrap';
 
 export default function LogIn( { data }) {
     const [formData, setFormData] = useState({email:"", password:""});
@@ -13,7 +14,7 @@ export default function LogIn( { data }) {
 
     const location = useLocation();
 
-    const msg = useOutletContext()
+    const msg = useOutletContext();
 
     const [userL, setUserL] = useContext(UserContext);
     
@@ -28,25 +29,52 @@ export default function LogIn( { data }) {
     const email = formData.email;
     const password = formData.password;
 
+    // const handleSubmit = (e) => {
+    //     e.preventDefault()
+    //     async function logInData(){
+    //         setSubmit(false)
+    //         await signInWithEmailAndPassword(auth, email, password)
+    //             .then((userCredential) => {
+    //         const user = userCredential.user;
+    //         console.log(user);
+    //         setSubmit(true)
+    //         setUserL(user.uid)
+    //         (location.pathname)=='/logIn' ? navigate('/recipes') : navigate(location.pathname)  
+    //         })
+    //         .catch((error) => {
+    //             const errorCode = error.code;
+    //             const errorMessage = error.message;
+    //             alert(errorCode,errorMessage);
+    //         });
+    //     }
+    //     logInData();
+    // }
+
     const handleSubmit = (e) => {
-        e.preventDefault()
-        async function logInData(){
-            setSubmit(false)
-            signInWithEmailAndPassword(auth, email, password)
-                .then((userCredential) => {
-            const user = userCredential.user;
-            setSubmit(true)
-            setUserL(user.uid)
-            (location.pathname)=='/logIn' ? navigate('/recipes') : navigate(location.pathname)  
-            })
-            .catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
-                alert(errorCode,errorMessage);
-            });
-        }
-        logInData();
+      e.preventDefault() 
+      setSubmit(false)
+      signInWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+          // Signed in 
+          const user = userCredential.user;
+          setSubmit(true)
+          setUserL(user.uid)
+        
+          if((location.pathname)=='/logIn'){navigate('/recipes')} 
+          else {navigate(location.pathname)} 
+          
+          // (location.pathname)=='/logIn' ? navigate('/recipes') : navigate(location.pathname) 
+          
+      })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          setSubmit(true);
+          alert(errorCode, errorMessage);
+        });
+
     }
+
 
 
   return (
