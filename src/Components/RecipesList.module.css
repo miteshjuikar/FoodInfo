@@ -1,6 +1,7 @@
 .imageSection{
   height: 270px;
   width: 200px;
+  background-color: rgb(234, 235, 235);
   border-radius: 5px;
 }
 .imageSecSection{
