@@ -60,12 +60,12 @@ export default function Navbar() {
                     <span className={style.nav_item} >Cart</span>
                 </NavLink>
             </li>
-            <li>
-                <NavLink to='/about' style={({isActive}) => isActive ? activeStyle : null } > 
+            {/* <li>
+                <NavLink to='/' style={({isActive}) => isActive ? activeStyle : null } onClick={() => handleSectionClick("section1")} > 
                     <MdOutlinePeopleAlt  className={style.icon} />
                     <span className={style.nav_item} >About</span>
                 </NavLink>
-            </li>
+            </li> */}
             <li>
                 <NavLink to="/logIn"
                     onClick={!userL ? ()=> navigate('/logIn') : {handleLogout} } className={style.logout} 

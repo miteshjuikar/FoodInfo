@@ -89,12 +89,17 @@ export default function Container({fooditem}) {
  
   const handleSave = () => {
     let newData = fooditem._links.self.href
-    if (logInData.includes(newData)){
+    if(userL){    
+      if (logInData.includes(newData)){
       alert("Recipe already saveed");
+      }
+      else{
+        const newDataArray = [...logInData, newData];
+        setLogInData(newDataArray);
+      }
     }
     else{
-      const newDataArray = [...logInData, newData];
-      setLogInData(newDataArray);
+      alert("To save recipe, Please Log In first")
     }
     
   } 

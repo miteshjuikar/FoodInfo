@@ -146,7 +146,7 @@ function deleteElementFromArray(documentId, arrayFieldName, indexToDelete) {
 
   
   return (
-    <>
+    <div className={style.cartBgColor}>
     <div className={style.pageContent}>
       <div className={style.allContent}>
       {recipeData && recipeData.map((fooditem, i) => ( 
@@ -178,6 +178,6 @@ function deleteElementFromArray(documentId, arrayFieldName, indexToDelete) {
       </div>
 
     </div>
-    </>
+    </div>
   )
 }
