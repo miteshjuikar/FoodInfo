@@ -64,7 +64,7 @@ export default function LogIn( { data }) {
           else {navigate(location.pathname)} 
           
           // (location.pathname)=='/logIn' ? navigate('/recipes') : navigate(location.pathname) 
-          
+        
       })
         .catch((error) => {
           const errorCode = error.code;

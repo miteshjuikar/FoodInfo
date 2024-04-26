@@ -42,3 +42,9 @@
   column-gap: 20px;
    
 }
+
+.NextBtn{
+  margin: 30px 0px;
+  display: flex;
+  justify-content: center;
+}

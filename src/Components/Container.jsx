@@ -1,19 +1,20 @@
-import React, { useEffect } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import style from './Container.module.css'
 import { Link } from 'react-router-dom'
 import { UserContext, UserLogInData } from '../main';
 import { v4 as uuidv4 } from 'uuid';
 
-import { getDocs, setDoc } from 'firebase/firestore';
-import {doc, collection, onSnapshot } from "firebase/firestore";
+import { getFirestore,onSnapshot, collection, query, where, getDocs, doc, updateDoc, getDoc, setDoc } from "firebase/firestore";
 import { db } from './firebase';
 
 export default function Container({fooditem}) {
   const [flag, setFlag] = React.useState(false);
-  const recipeData = fooditem.recipe
   const [ logInData, setLogInData] = React.useContext(UserLogInData);
   const [ recipesListData, setRecipesListData ] = React.useState();
-  const [ userL ] = React.useContext(UserContext);
+
+const [userL, setUserL] = useContext(UserContext);
+
+  const recipeData = fooditem.recipe
 
   const digestList = recipeData.digest.map((data) => {
     return (
@@ -86,9 +87,23 @@ export default function Container({fooditem}) {
     }
     addData();
   },[logInData])
- 
+
+// Checking data in orevious to disable save button
+useEffect(() => {
+  if (logInData.includes(fooditem._links.self.href)){
+    setFlag(true)
+  }
+  else{
+    setFlag(false)
+  }
+},[logInData])
+
+
+
+// Handle save functionality
+const newData = fooditem._links.self.href
   const handleSave = () => {
-    let newData = fooditem._links.self.href
+    
     if(userL){    
       if (logInData.includes(newData)){
       alert("Recipe already saveed");
@@ -101,8 +116,38 @@ export default function Container({fooditem}) {
     else{
       alert("To save recipe, Please Log In first")
     }
-    
   } 
+
+// Call function to delete array element
+const removeSavedRecipe = () => {
+  deleteElementFromArray(userL, "logInData", newData);
+};
+
+// Delete element from array
+function deleteElementFromArray(documentId, arrayFieldName, valueToDelete) {
+  const firestore = getFirestore();
+  const docRef = doc(getFirestore(), "cart", documentId);
+
+  getDoc(docRef)
+    .then((docSnapshot) => {
+      if (docSnapshot.exists()) {
+        let cartData = docSnapshot.data();
+
+        if (Array.isArray(cartData[arrayFieldName])) {
+          const newArray = cartData[arrayFieldName].filter(item => item !== valueToDelete);
+          setLogInData(newArray);
+          return updateDoc(docRef, { [arrayFieldName]: newArray });
+        } else {
+          alert.error('The specified field is not an array.');
+        }
+      } else {
+        console.error("Document does not exist");
+      }
+    })
+    .catch((error) => {
+      console.error("Error updating array:", error);
+    });
+}
 
 return (
 <>
@@ -117,7 +162,7 @@ return (
         <h1>{recipeData.label}</h1>
         <p>See full recipe on:<Link to={recipeData.url}>Bon Appetit</Link>
         </p>
-        <button className={`btn btn-outline-secondary ${style.buttonStyle}`} onClick={handleSave}>Save </button>
+        <button className={`btn btn-outline-secondary ${style.buttonStyle}`} onClick={!flag ? handleSave : removeSavedRecipe}>{!flag ? "Save" : "Remove"} </button>
       </div>
       </div>
     </div>

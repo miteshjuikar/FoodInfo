@@ -83,14 +83,11 @@ function deleteElementFromArray(documentId, arrayFieldName, indexToDelete) {
                     setSavedURL({ [arrayFieldName]: newArray });
                     return updateDoc(docRef, { [arrayFieldName]: newArray });
                   } else {
-                    console.log('The specified field is not an array.');
+                    alert.error('The specified field is not an array.');
                   }
               } else {
-                  console.error("Document does not exist");
+                  alert.error("Document does not exist");
               }
-        })
-        .then(() => {
-            console.log("Array updated successfully");
         })
         .catch((error) => {
             alert("Error updating array:", error);

@@ -13,7 +13,8 @@ export async function RecipeData(val){
 }
 
 export async function SingleRecipeData(val){
-    const res = await fetch(singleDataURL);
+    
+    const res = await fetch(val);
     if (!res.ok) {
         throw {
             message: "Failed to fetch food cards",

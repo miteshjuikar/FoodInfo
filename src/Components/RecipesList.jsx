@@ -5,7 +5,6 @@ import Container from './Container';
 
 
 export default function RecipesList({recipesListData}) {
-
   return (
     <div className={style.foodContainer}>
 
@@ -25,11 +24,11 @@ export default function RecipesList({recipesListData}) {
           </div>
         ))}
 
-      <div className={style.NextBtn}>
-        <button className="btn btn-light">
+      {/* <div className={style.NextBtn}>
+        <button className="btn btn-light" onClick={loadNextData}>
            Load More
         </button>
-      </div>
+      </div> */}
     </div>
   )
 }
