@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import style from './Home.module.css'
 import { UserContext } from './main';
+import About from './Components/About';
 
 
 export default function Home() {
@@ -25,17 +26,7 @@ export default function Home() {
     </div>
 
     <div id="about" className={style.aboutDiv} >
-
-    <div><h1>About</h1></div>
-    <div><h1>About</h1></div>
-    <div><h1>About</h1></div>
-    <div><h1>About</h1></div>
-    <div><h1>About</h1></div>
-    <div><h1>About</h1></div>
-    <div><h1>About</h1></div>
-    <div><h1>About</h1></div>
-    <div><h1>About</h1></div>
-    <div><h1>About</h1></div>
+      <About />
     </div>
     </>
   )
